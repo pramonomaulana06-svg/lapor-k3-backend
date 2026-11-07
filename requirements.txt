@@ -1,0 +1,9 @@
+﻿fastapi
+uvicorn
+motor
+pydantic
+python-multipart
+python-jose[cryptography]
+passlib[bcrypt]
+python-dotenv
+slowapi

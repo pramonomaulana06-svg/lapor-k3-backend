@@ -31,9 +31,9 @@ def get_db():
     client = AsyncIOMotorClient(mongo_url)
     return client.lapor_k3.reports
 
+# FUNGSI INI SUDAH DIPERBAIKI
 def get_admin_hash():
-    ADMIN_PASSWORD_HASH = auth.get_password_hash("admin123")
-    return auth.get_password_hash(password)
+    return auth.get_password_hash("admin123")
 
 def verify_admin(authorization: str = Header(None)):
     if not authorization or not authorization.startswith("Bearer "):
@@ -78,7 +78,6 @@ async def track_report(request: Request, kode: str):
     if not report:
         raise HTTPException(404, "Kode tidak ditemukan")
     
-    # Perbaikan format tanggal agar bisa dibaca JSON
     created_at = report.get("created_at")
     if isinstance(created_at, datetime):
         created_at = created_at.isoformat()
@@ -129,7 +128,6 @@ async def admin_get_reports(authorization: str = Header(None)):
     cursor = db.find({}).sort("created_at", -1)
     reports = await cursor.to_list(length=1000)
     
-    # Perbaikan format tanggal dan _id
     for r in reports: 
         r["_id"] = str(r["_id"])
         if isinstance(r.get("created_at"), datetime):

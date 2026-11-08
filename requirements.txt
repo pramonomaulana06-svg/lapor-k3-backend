@@ -3,8 +3,9 @@ uvicorn
 motor
 pydantic
 python-multipart
-python-jose[cryptography]
-passlib[bcrypt]
+python-jose
+passlib
 python-dotenv
 slowapi
 bcrypt
+cryptography
